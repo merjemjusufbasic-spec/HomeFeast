@@ -1,0 +1,16 @@
+
+backend/config/config.php
+.env
+
+#logs
+backend/logs/*.log
+
+
+backend/vendor/
+node_modules/
+
+#editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

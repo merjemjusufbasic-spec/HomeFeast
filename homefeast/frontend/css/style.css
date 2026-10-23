@@ -1,0 +1,81 @@
+:root {
+  --pp-ink: #1f2a24;
+  --pp-bg: #fbf8f2;
+  --pp-green: #2f6b4f;
+  --pp-green-dark: #234f3a;
+  --pp-orange: #e07a2f;
+  --pp-cream: #fffdf8;
+  --bs-body-bg: var(--pp-bg);
+  --bs-body-color: var(--pp-ink);
+  --bs-link-color: var(--pp-green);
+  --bs-link-hover-color: var(--pp-green-dark);
+}
+
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+h1, h2, h3, h4, .navbar-brand { font-family: Georgia, "Times New Roman", serif; }
+
+.pp-nav { background: var(--pp-green-dark); }
+.pp-nav .nav-link.active { color: #ffd9a8 !important; }
+
+.btn-primary {
+  --bs-btn-bg: var(--pp-green);
+  --bs-btn-border-color: var(--pp-green);
+  --bs-btn-hover-bg: var(--pp-green-dark);
+  --bs-btn-hover-border-color: var(--pp-green-dark);
+  --bs-btn-active-bg: var(--pp-green-dark);
+  --bs-btn-active-border-color: var(--pp-green-dark);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--pp-green);
+  --bs-btn-border-color: var(--pp-green);
+  --bs-btn-hover-bg: var(--pp-green);
+  --bs-btn-hover-border-color: var(--pp-green);
+  --bs-btn-active-bg: var(--pp-green-dark);
+}
+.btn-accent { background: var(--pp-orange); border-color: var(--pp-orange); color: #fff; }
+.btn-accent:hover { background: #c4651f; border-color: #c4651f; color: #fff; }
+
+.card { border: 1px solid #e8e0d0; background: var(--pp-cream); }
+.stat-card .stat-number { font-size: 2rem; font-weight: 700; color: var(--pp-green); }
+
+/* Recipe image placeholders (replaced by real images later) */
+.recipe-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, .92);
+  font-size: 2.6rem;
+  border-radius: .375rem .375rem 0 0;
+}
+.img-a { background: linear-gradient(135deg, #e07a2f, #b8481b); }
+.img-b { background: linear-gradient(135deg, #2f6b4f, #1b4332); }
+.img-c { background: linear-gradient(135deg, #c9a227, #8d6e12); }
+.img-d { background: linear-gradient(135deg, #a23b4a, #6d1f2c); }
+.img-e { background: linear-gradient(135deg, #4a7fa5, #2a4d6b); }
+
+.meal-hero { background: linear-gradient(135deg, var(--pp-green), var(--pp-green-dark)); color: #fff; border: 0; overflow: hidden; }
+.meal-hero .recipe-img { height: 100%; aspect-ratio: auto; min-height: 200px; border-radius: 0; font-size: 4rem; background: linear-gradient(135deg, #e07a2f, #b8481b); }
+
+.auth-wrap { max-width: 440px; margin: 6vh auto; }
+.auth-wrap .brand { font-size: 2rem; color: var(--pp-green); }
+
+/* Ingredient chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--pp-green);
+  color: #fff;
+  border-radius: 999px;
+  padding: .3rem .5rem .3rem .85rem;
+  font-size: .9rem;
+  margin: 0 .35rem .35rem 0;
+}
+.chip .btn-close { --bs-btn-close-opacity: .8; font-size: .6rem; }
+.chips-box { min-height: 3rem; }
+
+.match-badge { font-size: .75rem; }
+.star { color: #e0a82f; }
+
+.table > :not(caption) > * > * { background-color: transparent; }

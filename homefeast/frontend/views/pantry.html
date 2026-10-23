@@ -1,0 +1,64 @@
+<h2 class="mb-1">What can I cook?</h2>
+<p class="text-muted">Add the ingredients you have and we will show every meal you can make.</p>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <form id="ingredientForm" class="row g-2 mb-3">
+      <div class="col-12 col-md-9">
+        <input type="text" id="ingredientInput" class="form-control" placeholder="Type an ingredient (or several, separated by commas)" aria-label="Ingredient">
+      </div>
+      <div class="col-12 col-md-3"><button type="submit" class="btn btn-primary w-100"><i class="bi bi-plus-lg me-1"></i>Add</button></div>
+    </form>
+
+    <div class="small text-muted mb-1">Quick add:</div>
+    <div class="mb-3">
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="egg">egg</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="tomato">tomato</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="pasta">pasta</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="cheese">cheese</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="potato">potato</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-quick="milk">milk</button>
+    </div>
+
+    <div class="small text-muted mb-1">Your ingredients:</div>
+    <div class="chips-box" id="ingredientChips"></div>
+    <div id="chipsEmpty" class="text-muted small d-none">Nothing added yet.</div>
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <button type="button" class="btn btn-accent"><i class="bi bi-search me-1"></i>Find meals</button>
+      <button type="button" id="clearChips" class="btn btn-light">Clear all</button>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
+  <h5 class="mb-0">Meals you can make <span class="badge text-bg-secondary">4</span></h5>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="exactOnly">
+    <label class="form-check-label small" for="exactOnly">Only meals I can make right now</label>
+  </div>
+</div>
+<div class="alert alert-info small">Static preview. In the finished app the results come from the backend: the app's own recipes matched through the database, plus meals from TheMealDB's filter-by-ingredient endpoint.</div>
+
+<div class="row g-3">
+  <div class="col-6 col-md-4 col-lg-3"><div class="card h-100">
+    <div class="recipe-img img-a"><i class="bi bi-cup-hot"></i></div>
+    <div class="card-body"><h6 class="mb-1">Chicken Fried Rice</h6><span class="badge text-bg-success match-badge">Ready: 4 of 4</span></div>
+    <div class="card-footer bg-transparent"><button class="btn btn-sm btn-outline-primary">View recipe</button></div>
+  </div></div>
+  <div class="col-6 col-md-4 col-lg-3"><div class="card h-100">
+    <div class="recipe-img img-b"><i class="bi bi-egg-fried"></i></div>
+    <div class="card-body"><h6 class="mb-1">Garlic Chicken</h6><span class="badge text-bg-success match-badge">Ready: 3 of 3</span></div>
+    <div class="card-footer bg-transparent"><button class="btn btn-sm btn-outline-primary">View recipe</button></div>
+  </div></div>
+  <div class="col-6 col-md-4 col-lg-3"><div class="card h-100">
+    <div class="recipe-img img-c"><i class="bi bi-fire"></i></div>
+    <div class="card-body"><h6 class="mb-1">Chicken Curry</h6><span class="badge text-bg-warning match-badge">Missing 2: curry powder, coconut milk</span></div>
+    <div class="card-footer bg-transparent"><button class="btn btn-sm btn-outline-primary">View recipe</button></div>
+  </div></div>
+  <div class="col-6 col-md-4 col-lg-3"><div class="card h-100">
+    <div class="recipe-img img-d"><i class="bi bi-flower2"></i></div>
+    <div class="card-body"><h6 class="mb-1">Chicken Risotto</h6><span class="badge text-bg-warning match-badge">Missing 1: parmesan</span></div>
+    <div class="card-footer bg-transparent"><button class="btn btn-sm btn-outline-primary">View recipe</button></div>
+  </div></div>
+</div>

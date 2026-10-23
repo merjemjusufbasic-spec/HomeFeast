@@ -1,0 +1,28 @@
+<div class="auth-wrap">
+  <div class="text-center mb-4">
+    <div class="brand"><i class="bi bi-egg-fried me-2"></i>HomeFeast</div>
+    <p class="text-muted">Create your free account</p>
+  </div>
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h4 class="mb-3">Register</h4>
+      <form data-goto="#/login">
+        <div class="mb-3">
+          <label for="regName" class="form-label">Full name</label>
+          <input type="text" class="form-control" id="regName" required>
+        </div>
+        <div class="mb-3">
+          <label for="regEmail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="regEmail" required>
+        </div>
+        <div class="mb-3">
+          <label for="regPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="regPassword" minlength="8" required>
+          <div class="form-text">At least 8 characters.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Create account</button>
+      </form>
+      <p class="text-center small mt-3 mb-0">Already registered? <a href="#/login">Log in</a></p>
+    </div>
+  </div>
+</div>

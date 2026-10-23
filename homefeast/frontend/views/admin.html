@@ -1,0 +1,58 @@
+<h2 class="mb-1">Admin panel</h2>
+<p class="text-muted">Visible to admins only. Manage users, categories, ingredients and content.</p>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-md-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">48</div><div class="small text-muted">Users</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">42</div><div class="small text-muted">Recipes</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">9</div><div class="small text-muted">Categories</div></div></div></div>
+  <div class="col-6 col-md-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">120</div><div class="small text-muted">Ingredients</div></div></div></div>
+</div>
+
+<ul class="nav nav-tabs mb-3" role="tablist">
+  <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-users" type="button" role="tab">Users</button></li>
+  <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-categories" type="button" role="tab">Categories</button></li>
+  <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-ingredients" type="button" role="tab">Ingredients</button></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="tab-users" role="tabpanel">
+    <div class="card"><div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th class="text-end">Actions</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Admin User</td><td>admin@homefeast.test</td><td><span class="badge text-bg-danger">admin</span></td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button></td></tr>
+          <tr><td>2</td><td>Amina Hodzic</td><td>amina@homefeast.test</td><td><span class="badge text-bg-secondary">member</span></td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+          <tr><td>3</td><td>Tarik Begic</td><td>tarik@homefeast.test</td><td><span class="badge text-bg-secondary">member</span></td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="tab-pane fade" id="tab-categories" role="tabpanel">
+    <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg me-1"></i>Add category</button></div>
+    <div class="card"><div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead><tr><th>#</th><th>Name</th><th>Description</th><th class="text-end">Actions</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Breakfast</td><td>Morning meals</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+          <tr><td>2</td><td>Pasta</td><td>Pasta dishes</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+          <tr><td>3</td><td>Dessert</td><td>Sweet treats</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="tab-pane fade" id="tab-ingredients" role="tabpanel">
+    <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg me-1"></i>Add ingredient</button></div>
+    <div class="card"><div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead><tr><th>#</th><th>Name</th><th>Unit</th><th class="text-end">Actions</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>tomato</td><td>pcs</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+          <tr><td>2</td><td>flour</td><td>g</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+          <tr><td>3</td><td>milk</td><td>ml</td><td class="text-end"><button class="btn btn-sm btn-outline-primary">Edit</button> <button class="btn btn-sm btn-outline-danger">Delete</button></td></tr>
+        </tbody>
+      </table>
+    </div></div>
+  </div>
+</div>

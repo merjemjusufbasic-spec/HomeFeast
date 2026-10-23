@@ -1,0 +1,74 @@
+<h2 class="mb-1">Good to see you, Merjem</h2>
+<p class="text-muted mb-4">What are we cooking today?</p>
+
+<!-- Meal of the day (external API: TheMealDB random meal) -->
+<div class="card meal-hero shadow-sm mb-4">
+  <div class="row g-0">
+    <div class="col-md-4"><div class="recipe-img"><i class="bi bi-cup-hot"></i></div></div>
+    <div class="col-md-8">
+      <div class="card-body p-4">
+        <span class="badge text-bg-warning mb-2"><i class="bi bi-stars me-1"></i>Meal of the day</span>
+        <h3 class="mb-1">Chicken Alfredo Primavera</h3>
+        <div class="small opacity-75 mb-3">Italian &middot; Pasta &middot; 35 min</div>
+        <p class="mb-3">Creamy pasta with chicken and seasonal vegetables. Powered by TheMealDB: a new featured meal every day.</p>
+        <button class="btn btn-accent me-1" data-bs-toggle="modal" data-bs-target="#recipeModal">View recipe</button>
+        <button class="btn btn-outline-light"><i class="bi bi-heart me-1"></i>Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">8</div><div class="small text-muted">My recipes</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">15</div><div class="small text-muted">Favorites</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">6</div><div class="small text-muted">Reviews written</div></div></div></div>
+  <div class="col-6 col-lg-3"><div class="card stat-card text-center"><div class="card-body"><div class="stat-number">42</div><div class="small text-muted">Recipes in the app</div></div></div></div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100"><div class="card-body">
+      <h5><i class="bi bi-basket me-2"></i>Got ingredients to use up?</h5>
+      <p class="text-muted small">Tell us what is in your kitchen and see every meal you can make.</p>
+      <a href="#/pantry" class="btn btn-primary">What can I cook?</a>
+    </div></div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100"><div class="card-body">
+      <h5><i class="bi bi-compass me-2"></i>Feeling adventurous?</h5>
+      <p class="text-muted small">Browse by category or search thousands of recipes from around the world.</p>
+      <a href="#/explore" class="btn btn-outline-primary">Explore recipes</a>
+    </div></div>
+  </div>
+</div>
+
+<!-- Recipe detail modal -->
+<div class="modal fade" id="recipeModal" tabindex="-1" aria-labelledby="recipeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="recipeModalLabel">Chicken Alfredo Primavera</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <h6>Ingredients</h6>
+            <ul class="small">
+              <li>300 g fettuccine</li><li>2 chicken breasts</li><li>200 ml cream</li><li>50 g parmesan</li><li>2 cloves garlic</li><li>1 cup broccoli</li>
+            </ul>
+          </div>
+          <div class="col-md-7">
+            <h6>Instructions</h6>
+            <ol class="small">
+              <li>Cook the pasta in salted water.</li>
+              <li>Sear the chicken and slice it.</li>
+              <li>Simmer cream with garlic and parmesan.</li>
+              <li>Toss everything together and serve.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
