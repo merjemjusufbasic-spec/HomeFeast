@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     users ||--o{ recipes : "creates"
     users ||--o{ pantry : "owns"
@@ -39,3 +40,4 @@ erDiagram
         int recipe_id FK
         timestamp created_at
     }
+```
