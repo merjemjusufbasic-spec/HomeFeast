@@ -9,6 +9,7 @@
  2.generated placeholder meal examples.
  3.generated app.js generic code.
  4. helped me fix the logic in my db diagram.
+ 5. helped me center the images on the front page.
 
 ## Mistakes AI made 
 
