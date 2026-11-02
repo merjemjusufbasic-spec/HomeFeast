@@ -1,38 +1,49 @@
 ```mermaid
 erDiagram
-    users ||--o{ recipes : "creates"
-    users ||--o{ pantry : "owns"
-    users ||--o{ favorites : "saves"
-    recipes ||--o{ favorites : "favorited in"
-    ingredients ||--o{ pantry : "stored as"
+    users o|--o{ recipes : creates
+    categories o|--o{ recipes : categorizes
+    users ||--o{ pantry : owns
+    users ||--o{ favorites : saves
+    recipes ||--o{ favorites : receives
+    recipes ||--o{ recipe_ingredients : contains
 
     users {
         int id PK
         varchar name
-        varchar email
+        varchar email UK
         varchar password
-        varchar role
+        enum role
+        timestamp created_at
+    }
+    categories {
+        int id PK
+        varchar name UK
+        text description
         timestamp created_at
     }
     recipes {
         int id PK
-        int created_by FK
         varchar title
         text description
         text instructions
-        varchar category
+        int prep_time
+        int category_id FK
+        int user_id FK
+        timestamp created_at
     }
-    ingredients {
+    recipe_ingredients {
         int id PK
-        varchar name
-        varchar unit
+        int recipe_id FK
+        varchar ingredient_name
+        varchar quantity
     }
     pantry {
         int id PK
         int user_id FK
-        int ingredient_id FK
+        varchar ingredient_name
         decimal quantity
-        date expiration_date
+        varchar unit
+        timestamp created_at
     }
     favorites {
         int id PK
@@ -41,5 +52,8 @@ erDiagram
         timestamp created_at
     }
 ```
-**What is "What can i cook?"**
-What can i cook is a feature that lets users input ingridients they have on hand and the backend connects the input with the db which outputs all the meals that are covered by all (or most) ingridients the user picked.
+
+`recipes.category_id` and `recipes.user_id` are nullable foreign keys. Deleting a category sets `recipes.category_id` to `NULL`; deleting a user cascades to that user's recipes, pantry rows, and favorites. Deleting a recipe cascades to its recipe ingredients and favorites. The `favorites` table has a unique constraint on (`user_id`, `recipe_id`) to prevent duplicate favorites.
+
+**What can I cook?**
+The pantry matching feature compares ingredient names in `pantry` with `recipe_ingredients` and returns recipes ranked by the number of matching ingredients.
