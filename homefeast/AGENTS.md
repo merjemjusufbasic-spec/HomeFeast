@@ -1,51 +1,65 @@
-# AGENTS.md
+# AGENTS.md — HomeFeast
 
-## Project Overview
-HomeFeast: A responsive single-page web application (SPA) for recipe management, pantry tracking, meal planning, and user profiles[cite: 1, 3].
-- Roles: Regular User, Admin[cite: 1].
-- Entities: Users, Recipes, Ingredients, Pantry, Favorites[cite: 1].
+Context file for AI coding assistants working on this repository.
 
-## Technology Stack
-- Frontend: Single-Page Application (SPA) using HTML5, CSS3, JavaScript (AJAX/Fetch), and Bootstrap 5[cite: 1, 2].
-- Backend: PHP with FlightPHP framework (REST API), PHP PDO[cite: 1].
-- Database: MySQL / MariaDB[cite: 1, 2].
-- Local Environment: XAMPP[cite: 2].
+## Project description
+HomeFeast is a responsive single-page web application for pantry tracking and recipe discovery. Users keep a pantry, browse and favorite recipes, and see which recipes they can cook with what they own. Admins manage all data. Recipe discovery is enriched through the TheMealDB external API.
 
-## Folder Structure
-- `frontend/`: 
-  - `css/`: Custom styles and stylesheets[cite: 1, 2].
-  - `js/`: JavaScript logic (`app.js`) for SPA routing and AJAX calls[cite: 1, 2].
-  - `views/`: HTML template components loaded dynamically (`login.html`, `dashboard.html`, `pantry.html`, `recipes.html`, etc.)[cite: 1, 3].
-  - `static/`: Static assets (images, icons)[cite: 1, 2].
-- `backend/`:
-  - `routes/`: FlightPHP REST API endpoints[cite: 1].
-  - `services/`: Business logic and validation layer[cite: 1].
-  - `dao/`: Data Access Object layer for direct database queries using PDO prepared statements[cite: 1].
-  - `middleware/`: Authentication (JWT), authorization, logging, and error handling middleware[cite: 1].
-  - `config/`: Application configuration (`config.php` ignored by Git, `config.example.php` committed)[cite: 1, 3].
-  - `logs/`: Application info and error log files[cite: 1, 3].
-- `docs/`: `AI_LOG.md` and project documentation[cite: 1, 3].
+## Technology stack
+- Backend: PHP, FlightPHP (REST API), PDO, MySQL/MariaDB, firebase/php-jwt
+- Frontend: HTML, CSS, JavaScript (fetch/AJAX), Bootstrap 5
+- API docs: OpenAPI / Swagger
+- Local environment: XAMPP
 
-## Frontend Guidelines
-- All UI views are located in `frontend/views/`[cite: 1, 3].
-- Navigation must operate as a Single Page Application (SPA) without reloading the page[cite: 1, 2].
-- Use Bootstrap 5 classes for responsive layout and styling; avoid unnecessary inline styles[cite: 1, 2].
-- AJAX/Fetch calls must only exist in JS service/controller files, not directly inside HTML view files[cite: 1].
+## Architecture rules
+1. Backend is pure PHP, frontend is only HTML/CSS/JS. Never mix them.
+2. Layers: route -> service -> DAO -> database. Routes never call DAOs; services are the only layer that calls DAOs.
+3. All SQL goes through PDO prepared statements. No string-concatenated values. SQL lives only in DAO classes.
+4. Every DAO extends `BaseDao`, which holds the shared CRUD methods.
+5. Authentication, authorization (role check), request logging and error handling are reusable FlightPHP middleware.
+6. Secrets (DB credentials, JWT secret, API keys) live in `backend/config/config.php`, which is gitignored. Only `config.example.php` is committed.
+7. External API failures: timeout, log to error log, return a friendly message; the app must keep working.
+8. Views contain no AJAX calls; only JS service files talk to the API.
+9. Responses are JSON with correct HTTP status codes (200, 201, 400, 401, 403, 404, 500; 503 when an external API is down).
+10. Every entity service extends `BaseService`, declares its validation in `$rules`, and adds entity-specific constraints by overriding `validate()`. Services report problems by throwing `ApiException` (its code is the HTTP status). Services never use Flight, `$_GET` or `$_POST`.
+11. Route files are classes with static handler methods plus a `register()` method that calls `Flight::route(...)`. Handlers stay thin: read input via `RequestHelper`, call one service method, return `Flight::json(...)`. Handlers do not catch exceptions; `middleware/ErrorHandler.php` does.
+12. OpenAPI: every route handler has an `@OA\...` docblock directly above it; shared models live in `routes/OpenApiSpec.php`. Add or change the docblock whenever a route changes. Swagger UI is served at `/docs`, the spec at `/openapi.json`.
+13. External APIs are called only from a service in `backend/services/` (cURL with timeouts). The frontend calls our backend endpoint, never the external API. Never log the API key.
+14. Code must run on PHP 8.0 (XAMPP): no `readonly`, enums or `new` in initializers.
 
-## Backend Guidelines
-- Follow the strict architecture chain: `Route -> Service -> DAO -> Database`[cite: 1].
-- Routes must return clean JSON output with appropriate HTTP status codes (200, 201, 400, 401, 403, 404, 500)[cite: 1].
-- Use PDO prepared statements for all SQL queries[cite: 1].
-- Do not mix frontend and backend code[cite: 1].
+## Folder structure
+```
+backend/
+  index.php     entry point: loads everything, registers routes, Flight::start()
+  .htaccess     Apache rewrite to index.php (XAMPP)
+  routes/       one *Routes.php class per resource + OpenApiSpec.php (schemas), DocsRoutes.php (Swagger), RequestHelper.php
+  services/     BaseService, one service per entity, MealDbService (external API), ApiException, Logger
+  dao/          Database.php, BaseDao + one DAO per entity
+  middleware/   ErrorHandler, CorsMiddleware (auth, role check and request logging come in Milestone 4)
+  config/       config.example.php (config.php is gitignored)
+  database/     homefeast.sql (schema + sample data)
+  logs/         info.log and error.log (gitignored)
+frontend/
+  index.html    app shell
+  css/          styles
+  js/           router and app scripts
+  views/        HTML templates, one per page
+  assets/       images
+docs/           ERD.md, AI_LOG.md
+```
 
-## Naming & Style Conventions
-- PHP Classes: `PascalCase` (e.g., `RecipeService.php`, `UserDao.php`)[cite: 1].
-- JavaScript & PHP variables: `camelCase`[cite: 3].
-- Database tables & columns: `snake_case`[cite: 3].
+## Naming conventions
+- PHP classes: PascalCase, file name matches class (`RecipeDao.php`, `RecipeService.php`, `RecipeRoutes.php`).
+- Route handler names: `index`, `show`, `store`, `update`, `destroy`.
+- PHP and JS variables: camelCase. DB tables and columns: snake_case, plural table names.
+- REST routes: plural nouns, lowercase (`/recipes`, `/pantry`).
 
-## Rules for AI Assistants
-- Always adhere to the project folder structure defined above[cite: 1, 3].
-- Do not add new external libraries or JS frameworks without prior approval[cite: 1, 3].
-- Never write plain text database queries outside DAO classes[cite: 1, 3].
-- Do not expose database credentials, JWT secrets, or API keys directly in code[cite: 1, 3].
-- Explain changes clearly and suggest small, incremental edits[cite: 3].
+## Roles
+- `admin`: full CRUD on every entity.
+- `user`: manage own pantry and favorites, create recipes, view the rest.
+
+## Rules for the AI
+- Explain any code you generate so the author can defend it.
+- Do not add libraries or frameworks without asking (current Composer packages: flightphp/core, zircote/swagger-php, doctrine/annotations if swagger-php needs it to read docblocks).
+- Never commit or print secrets.
+- Keep changes scoped to the current milestone branch.

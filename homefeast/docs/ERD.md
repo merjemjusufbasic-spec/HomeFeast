@@ -53,6 +53,16 @@ erDiagram
     }
 ```
 
+## Relationships and delete rules
+| Relationship | Type | On delete |
+|---|---|---|
+| users → recipes | 1 : N | CASCADE |
+| users → pantry | 1 : N | CASCADE |
+| users → favorites | 1 : N | CASCADE |
+| categories → recipes | 1 : N | SET NULL |
+| recipes → favorites | 1 : N | CASCADE |
+| recipes → recipe_ingredients | 1 : N | CASCADE |
+
 `recipes.category_id` and `recipes.user_id` are nullable foreign keys. Deleting a category sets `recipes.category_id` to `NULL`; deleting a user cascades to that user's recipes, pantry rows, and favorites. Deleting a recipe cascades to its recipe ingredients and favorites. The `favorites` table has a unique constraint on (`user_id`, `recipe_id`) to prevent duplicate favorites.
 
 **What can I cook?**
