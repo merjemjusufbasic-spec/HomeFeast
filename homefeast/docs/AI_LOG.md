@@ -38,12 +38,16 @@ gemini pro, claude.
 ## Milestone 3 — Services, routes, OpenAPI, external API
 
 ### Tools used
-Claude (Claude Code, model claude-sonnet-5-5): wrote the service layer, the FlightPHP routes with OpenAPI annotations, the TheMealDB integration and the test harness; updated README, AGENTS.md and this log. I reviewed the code and ran the checks described below.
+Claude (Claude Code, model claude-sonnet-5-5): wrote the service layer, the FlightPHP routes with OpenAPI annotations, the TheMealDB integration and the test harness; I reviewed the code and ran the checks.
 
 ### Most important prompts
-1. "Strictly follow the requirements for Milestone 3 and do them, and explain what you did so I can copy-paste the code when needed" (attached the project zip and the requirements document).
-2. Follow-up prompts about how each part works so I can explain it at the defense (BaseService validation, error handler, external API failure handling).
+1. Follow-up prompts on how `BaseService` validation, `ErrorHandler`, `.htaccess`, and `MealDbService` work so I can explain every file at the defense[cite: 3].
+2. Troubleshooting prompts sharing the white-screen test results, Swagger UI `"Failed to load API definition"` error, and `logs\error.log` output to fix `index.php`, `config.php`, `doctrine/annotations`, and `DocsRoutes.php`
+3. strictly follow the requirements for routes and services, make sure they work with my index.php.
 
 ### Cases where the AI was wrong or produced poor code
 1. **What was wrong:** the AI added the new TheMealDB settings (`MEALDB_BASE_URL`, `MEALDB_API_KEY`, `EXTERNAL_API_TIMEOUT`) only to `config.example.php`. My real `config.php` is gitignored and did not have them, so every external API call failed with `Call to undefined method Config::MEALDB_BASE_URL()`. **How I noticed:** the first run of the test harness against my real config returned 500 for all `/external/...` calls and the error log showed that message. **How I fixed it:** copied the three new methods from `config.example.php` into my `config.php` and added this step to the README run instructions.
-2. **TODO before submitting:** add one more real case from your own testing (for example something in Swagger UI that did not match the code, a route that returned the wrong status code, or validation that was too strict or too loose) in the same format: what was wrong / how I noticed / how I fixed it. Do not submit this file with this line still in it, and do not invent a case that did not happen.
+2. 2. **What was wrong:** `/openapi.json` returned `500 Internal Server Error` because `OpenApiSpec.php` was not required before `swagger-php` reflected on `\OpenApiSpec`, and `DocsRoutes.php` called `$generator->setLogger(...)` instead of passing `NullLogger` to the `OpenApi\Generator` constructor (causing FlightPHP to turn the `"Skipping unknown \OpenApiSpec"` warning into an `ErrorException`). **How I noticed:** Swagger UI at `http://localhost:8000/docs` failed to load `/openapi.json` and `backend/logs/error.log` recorded `ErrorException: Skipping unknown \OpenApiSpec`. **How I fixed it:** Added `require_once __DIR__ . '/OpenApiSpec.php';` and passed `new \Psr\Log\NullLogger()` into `new \OpenApi\Generator($logger)` inside `DocsRoutes::spec()`.
+
+
+
