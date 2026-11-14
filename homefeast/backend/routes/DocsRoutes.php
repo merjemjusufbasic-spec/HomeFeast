@@ -27,16 +27,14 @@ class DocsRoutes
         ]);
     }
 
-    public static function spec(): void
+   public static function spec(): void
     {
-        $generator = new \OpenApi\Generator();
-        // swagger-php reports problems as PHP warnings; keep them out of the JSON output.
-        if (class_exists('\Psr\Log\NullLogger') && method_exists($generator, 'setLogger')) {
-            $generator->setLogger(new \Psr\Log\NullLogger());
-        }
-        $openapi = $generator->generate([__DIR__], null, false);   // scan this routes/ folder
+        require_once __DIR__ . '/OpenApiSpec.php';
+
+        $logger    = class_exists('\Psr\Log\NullLogger') ? new \Psr\Log\NullLogger() : null;
+        $generator = new \OpenApi\Generator($logger);
+        $openapi   = $generator->generate([__DIR__], null, false);   // scan this routes/ folder
         if ($openapi === null) {
-            // swagger-php found no annotations: it cannot read @OA docblocks without doctrine/annotations
             throw new ApiException('OpenAPI spec could not be generated. Run "composer require doctrine/annotations" in the backend folder.', 500);
         }
         $spec = json_decode($openapi->toJson(), true);
