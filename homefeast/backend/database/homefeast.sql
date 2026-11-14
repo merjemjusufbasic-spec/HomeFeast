@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `homefeast`
 --
+CREATE DATABASE IF NOT EXISTS `homefeast` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `homefeast`;
 
 -- --------------------------------------------------------
 
@@ -161,9 +163,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`) VALUES
-(1, 'Admin User', 'admin@homefeast.com', '$2y$10$e.g.hashedpasswordplaceholder', 'admin', '2026-10-30 12:36:29'),
-(2, 'John Doe', 'john@example.com', '$2y$10$e.g.hashedpasswordplaceholder', 'user', '2026-10-30 12:36:29'),
-(3, 'Jane Smith', 'jane@example.com', '$2y$10$e.g.hashedpasswordplaceholder', 'user', '2026-10-30 12:36:29');
+(1, 'Admin User', 'admin@homefeast.com', '$2b$12$gWZQY4fIiLeayy9a6va6y.ndOMixItFvEH4buHAbFANIwVzy.ZUEq', 'admin', '2026-10-30 12:36:29'),
+(2, 'John Doe', 'john@example.com', '$2b$12$ZYY5QlOZG4zvl6Dw6IJbTOB6mgMQwpw3twW81.RzknVCLxap3Zzg.', 'user', '2026-10-30 12:36:29'),
+(3, 'Jane Smith', 'jane@example.com', '$2b$12$ZYY5QlOZG4zvl6Dw6IJbTOB6mgMQwpw3twW81.RzknVCLxap3Zzg.', 'user', '2026-10-30 12:36:29');
 
 --
 -- Indexes for dumped tables
