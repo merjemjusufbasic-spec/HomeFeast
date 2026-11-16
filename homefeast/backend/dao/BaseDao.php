@@ -1,14 +1,6 @@
 <?php
 require_once __DIR__ . '/Database.php';
 
-/**
- * Reusable CRUD for every DAO. Child classes only pass the table name
- * (and, if needed, the list of columns that may be written).
- *
- * Table and column names never come from user input: they come from the
- * child class, and column names are checked against $allowedColumns.
- * All values are bound with prepared statements.
- */
 abstract class BaseDao
 {
     protected PDO $connection;
@@ -24,7 +16,7 @@ abstract class BaseDao
         $this->allowedColumns = $allowedColumns;
     }
 
-    /** Run a prepared SELECT and return all rows. */
+    
     protected function query(string $sql, array $params = []): array
     {
         $stmt = $this->connection->prepare($sql);
@@ -32,20 +24,20 @@ abstract class BaseDao
         return $stmt->fetchAll();
     }
 
-    /** Run a prepared SELECT and return one row, or null. */
+    
     protected function queryOne(string $sql, array $params = []): ?array
     {
         $rows = $this->query($sql, $params);
         return $rows[0] ?? null;
     }
 
-    /** READ (all) */
+    
     public function getAll(): array
     {
         return $this->query("SELECT * FROM {$this->table}");
     }
 
-    /** READ (one) */
+    
     public function getById(int $id): ?array
     {
         return $this->queryOne(

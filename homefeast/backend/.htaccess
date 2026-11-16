@@ -1,0 +1,13 @@
+# Used when the backend runs under Apache (XAMPP). Not needed for `php -S`.
+RewriteEngine On
+
+# Never serve internal folders (logs, config, source) over HTTP
+RewriteRule ^(logs|config|vendor|dao|services|database)/ - [F,L]
+
+# Keep the Authorization header (JWT, Milestone 4)
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Send every other request to Flight
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
